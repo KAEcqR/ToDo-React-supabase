@@ -19,7 +19,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex min-h-[calc(100vh-3.6rem)] items-center justify-center">
-      <Card className="relative w-full max-w-sm"> 
+      <Card className="relative w-full max-w-sm rounded-xl"> 
         <CardHeader>
           <CardTitle>
             Login
@@ -29,7 +29,7 @@ const LoginPage = () => {
           </CardDescription>
         </CardHeader> 
             <CardContent> 
-              <Button type="button" className="w-full" onClick={handleGoogleLogin} > 
+              <Button type="button" className="w-full rounded-lg" onClick={handleGoogleLogin} > 
                 Continue with Google
               </Button>
             </CardContent> 

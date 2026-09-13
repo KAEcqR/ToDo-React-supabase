@@ -21,8 +21,10 @@ import {
   ContextMenuContent,
   ContextMenuGroup,
   ContextMenuItem,
+  ContextMenuSeparator,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu"
+import { PencilIcon, TrashIcon } from "@phosphor-icons/react";
 
 
 type Task = {
@@ -96,7 +98,7 @@ const ToDoPage = () => {
 
   return (
     <div className="flex min-h-[calc(100vh-3.6rem)] items-center justify-center">
-      <Card className="relative w-full max-w-sm">
+      <Card className="relative w-full max-w-sm rounded-xl">
         <CardHeader>
           <CardTitle>
             My ToDo's
@@ -113,10 +115,11 @@ const ToDoPage = () => {
               <ContextMenuTrigger>
                 <Field
                   orientation="horizontal"
-                  className="cursor-context-menu"
+                  className="cursor-context-menu rounded-md p-2 transition-colors hover:bg-accent/50"
                 >
                   <Checkbox
                     id={`task-${task.id}`}
+                    className={"rounded-sm size-5"}
                     checked={task.completed}
                     onCheckedChange={(checked) => {
                       if (typeof checked === "boolean") {
@@ -139,12 +142,19 @@ const ToDoPage = () => {
                   </FieldContent>
                 </Field>
               </ContextMenuTrigger>
-
-              <ContextMenuContent>
+              <ContextMenuContent className="rounded-lg">
                 <ContextMenuGroup>
-                  <ContextMenuItem>Back</ContextMenuItem>
-                  <ContextMenuItem disabled>Forward</ContextMenuItem>
-                  <ContextMenuItem>Reload</ContextMenuItem>
+                  <ContextMenuItem>
+                    <PencilIcon />
+                    Edit
+                  </ContextMenuItem>
+                </ContextMenuGroup>
+                <ContextMenuSeparator />
+                <ContextMenuGroup>
+                  <ContextMenuItem variant="destructive">
+                    <TrashIcon />
+                    Delete
+                  </ContextMenuItem>
                 </ContextMenuGroup>
               </ContextMenuContent>
             </ContextMenu>
@@ -153,7 +163,7 @@ const ToDoPage = () => {
 
         <CardFooter className="flex gap-2">
           <Input
-            className="w-full"
+            className="w-full rounded-lg"
             placeholder="What do you want to do today?"
             value={task}
             onChange={(event) => setTask(event.target.value)}
@@ -161,7 +171,7 @@ const ToDoPage = () => {
 
           <Button
             type="button"
-            className="w-20"
+            className="w-20 rounded-lg"
             onClick={addNewTask}
           >
             Submit
