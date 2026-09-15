@@ -96,6 +96,22 @@ const ToDoPage = () => {
     );
   };
 
+  const deleteTask = async (taskId: number) => {
+      const { error } = await supabase
+        .from("tasks")
+        .delete()
+        .eq("id", taskId);
+
+      if (error) {
+        console.error("Error deleting task:", error);
+        return
+      }
+
+      setTasks((currentTasks) =>
+        currentTasks.filter((task) => task.id !== taskId)
+      );
+    }
+
   return (
     <div className="flex min-h-[calc(100vh-3.6rem)] items-center justify-center">
       <Card className="relative w-full max-w-sm rounded-xl">
@@ -151,7 +167,7 @@ const ToDoPage = () => {
                 </ContextMenuGroup>
                 <ContextMenuSeparator />
                 <ContextMenuGroup>
-                  <ContextMenuItem variant="destructive">
+                  <ContextMenuItem variant="destructive" onClick={() => deleteTask(task.id)}>
                     <TrashIcon />
                     Delete
                   </ContextMenuItem>
